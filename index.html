@@ -1,0 +1,1043 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>eMANDEVAL Future: Vaccine Mandate Decision Aid</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Evidence-informed decision aid for exploring future vaccine mandate designs across Australia, France and Italy." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <div class="top-strip">
+    Decision support for future vaccine mandate planning
+  </div>
+
+  <header class="app-header">
+    <div class="app-brand">
+      <div class="app-logo" aria-hidden="true">
+        <span class="app-logo-mark"></span>
+        <span class="app-logo-text">eM</span>
+      </div>
+      <div class="app-title-block">
+        <p class="eyebrow">Decision aid tool</p>
+        <h1>eMANDEVAL Future</h1>
+        <p class="app-subtitle">Decision aid for vaccine mandate design across Australia, France and Italy</p>
+      </div>
+    </div>
+    <div class="app-meta">
+      <span class="app-meta-item">Version <strong>v2.3.0</strong></span>
+      <span class="app-meta-item">Simplified Apr 2026</span>
+      <button id="btn-presentation-mode" class="btn outline" type="button">Presentation mode</button>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Primary">
+    <button class="tab-link active" data-tab="tab-intro">Introduction</button>
+    <button class="tab-link" data-tab="tab-features">Mandate design features</button>
+    <button class="tab-link" data-tab="tab-settings">Settings</button>
+    <button class="tab-link" data-tab="tab-config">Configuration</button>
+    <button class="tab-link" data-tab="tab-costs">Costing</button>
+    <button class="tab-link" data-tab="tab-results">Results</button>
+    <button class="tab-link" data-tab="tab-scenarios">Saved scenarios and exports</button>
+    <button class="tab-link" data-tab="tab-briefings">Briefings and AI prompts</button>
+    <button class="tab-link" data-tab="tab-appendix">Technical appendix</button>
+  </nav>
+
+  <main id="main-content" class="app-main">
+    <div class="app-shell">
+    <!-- Introduction -->
+    <section id="tab-intro" class="tab-content active">
+      <div class="hero-panel">
+        <div class="hero-copy">
+          <p class="hero-kicker">Public health policy planning</p>
+          <h2>Compare support, health impact and implementation cost in one place</h2>
+          <p>
+            This tool brings together preference evidence, epidemiological assumptions and costing inputs in a simple workflow so analysts can test alternative mandate designs and document the reasoning behind each scenario.
+          </p>
+          <div class="hero-chip-row">
+            <span class="hero-chip">Support estimates</span>
+            <span class="hero-chip">Lives saved</span>
+            <span class="hero-chip">Benefit-cost metrics</span>
+          </div>
+        </div>
+        <div class="hero-metrics" aria-label="Overview">
+          <div class="hero-metric">
+            <div class="hero-metric-value">3</div>
+            <div class="hero-metric-label">countries</div>
+          </div>
+          <div class="hero-metric">
+            <div class="hero-metric-value">2</div>
+            <div class="hero-metric-label">outbreak frames</div>
+          </div>
+          <div class="hero-metric">
+            <div class="hero-metric-value">1,000</div>
+            <div class="hero-metric-label">support simulation draws</div>
+          </div>
+        </div>
+      </div>
+      <div class="section-intro">A simpler interface for policy analysis, reporting and manuscript figures.</div>
+      <div class="card emphasis-card">
+        <h2>What this tool does</h2>
+        <p>
+          eMANDEVAL Future helps governments and public health agencies explore the implications of different <strong>potential future vaccine mandates</strong> in Australia, France and Italy. It combines:
+        </p>
+        <ul>
+          <li>Preference evidence from a discrete choice experiment in the three countries.</li>
+          <li>Simple epidemiological inputs (expected lives saved per 100,000 people).</li>
+          <li>Indicative implementation costs and a benefit metric (for example a value of statistical life).</li>
+        </ul>
+        <p class="important-note">
+          The tool summarises trade-offs between predicted public support, lives saved and implementation costs. It does not replace legal, ethical or political judgement.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Quick start</h2>
+        <ol class="how-to-list">
+          <li>
+            <strong>Settings:</strong> Set the analysis horizon, population, currency label and benefit metric.
+          </li>
+          <li>
+            <strong>Configuration:</strong> Choose a country, outbreak scenario and mandate design. Add short equity notes only if needed.
+          </li>
+          <li>
+            <strong>Costing:</strong> Enter implementation costs or load defaults.
+          </li>
+          <li>
+            <strong>Results:</strong> Review predicted support, lives saved and benefit-cost metrics.
+          </li>
+          <li>
+            <strong>Saved scenarios:</strong> Save and export scenarios for comparison and reporting.
+          </li>
+          <li>
+            <strong>Briefings and AI prompts:</strong> Generate briefing text and reusable prompts for drafting and review.
+          </li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <h2>Data and methods</h2>
+        <p>
+          Model-based public support is derived from mixed logit estimates of preferences for potential future vaccine
+          mandate designs in Australia, France and Italy under mild and severe outbreak frames. Support is computed as
+          the probability of choosing a mandate over an opt-out option, averaged over 1,000 draws from the estimated
+          preference distributions (fixed seed for reproducibility).
+        </p>
+        <p>
+          Cost and benefit inputs are indicative and should be aligned with country-specific regulatory impact analysis
+          guidance before formal use. Country presets and calibration helpers allow you to restore recommended defaults
+          or align the tool with updated national guidance.
+        </p>
+        <p class="context-banner">
+          This tool summarises preference and cost-benefit evidence for potential future vaccine mandates. It does not
+          replace legal review, ethical assessment or detailed equity analysis. Distributional notes and equity flags
+          are provided as prompts for discussion rather than a full equity model.
+        </p>
+      </div>
+    </section>
+
+    <!-- Mandate design features -->
+    <section id="tab-features" class="tab-content">
+      <div class="card">
+        <h2>Mandate design attributes in the preference study</h2>
+        <p>
+          The discrete choice experiment asked members of the public in Australia, France and Italy to choose between
+          potential future vaccine mandate options and an opt-out (no mandate) option. Each mandate was described using
+          the attributes below.
+        </p>
+      </div>
+
+      <div class="card grid-2">
+        <div class="feature-block">
+          <h3>
+            <span class="feature-icon">🏥</span>
+            Scope of mandate
+            <span class="info-icon" data-tooltip="Which groups or settings are covered by the mandate (for example only high-risk workers, or the wider working population and public venues).">i</span>
+          </h3>
+          <ul class="feature-list">
+            <li>
+              <strong>High-risk occupations only</strong><br />
+              Vaccination is required only for people in jobs with high exposure risk or essential public roles (for
+              example healthcare workers, emergency responders).
+            </li>
+            <li>
+              <strong>All occupations &amp; public spaces</strong><br />
+              Everyone working or entering public venues (for example cinemas, malls, restaurants, public transport) must
+              be vaccinated.
+            </li>
+          </ul>
+        </div>
+
+        <div class="feature-block">
+          <h3>
+            <span class="feature-icon">📜</span>
+            Exemption policy
+            <span class="info-icon" data-tooltip="Conditions under which people can be excused from the mandate, ranging from strict medical exemptions only to broader personal belief exemptions.">i</span>
+          </h3>
+          <ul class="feature-list">
+            <li>
+              <strong>Medical only</strong><br />
+              Only those with certified medical reasons (for example severe allergies) can opt out of vaccination.
+            </li>
+            <li>
+              <strong>Medical + religious</strong><br />
+              Exemptions are allowed for medical reasons or documented religious beliefs (with verification).
+            </li>
+            <li>
+              <strong>Medical + religious + personal belief</strong><br />
+              Exemptions are allowed for medical reasons, religious beliefs or strong personal objections (broader opt-out).
+            </li>
+          </ul>
+        </div>
+
+        <div class="feature-block">
+          <h3>
+            <span class="feature-icon">🎯</span>
+            Coverage requirement to lift mandate
+            <span class="info-icon" data-tooltip="Vaccination coverage threshold at which the mandate would be lifted. Higher thresholds imply the mandate remains in place for longer.">i</span>
+          </h3>
+          <ul class="feature-list">
+            <li>
+              <strong>50% population vaccinated</strong><br />
+              The mandate is lifted once about half of the population has been vaccinated.
+            </li>
+            <li>
+              <strong>70% population vaccinated</strong><br />
+              The mandate is lifted once most people are vaccinated and near-normal life can resume.
+            </li>
+            <li>
+              <strong>90% population vaccinated</strong><br />
+              The mandate is lifted once almost everyone is vaccinated and it is considered safe to remove all mandates.
+            </li>
+          </ul>
+        </div>
+
+        <div class="feature-block">
+          <h3>
+            <span class="feature-icon">❤️</span>
+            Expected lives saved
+            <span class="info-icon" data-tooltip="Expected epidemiological impact of introducing the mandate, expressed as lives saved per 100,000 people in the exposed population.">i</span>
+          </h3>
+          <p>
+            This attribute summarises the expected epidemiological benefit from introducing a mandate, expressed as
+            lives saved per 100,000 people.
+          </p>
+          <ul class="feature-list">
+            <li><strong>10 per 100,000</strong>&nbsp;&mdash; saves about 10 lives per 100,000 people.</li>
+            <li><strong>25 per 100,000</strong>&nbsp;&mdash; saves about 25 lives per 100,000 people.</li>
+            <li><strong>35 per 100,000</strong>&nbsp;&mdash; saves about 35 lives per 100,000 people.</li>
+            <li><strong>40 per 100,000</strong>&nbsp;&mdash; saves about 40 lives per 100,000 people.</li>
+          </ul>
+          <p class="small-note">
+            In the tool, this appears as a slider from 0 to 100 per 100,000 people, but the realistic range for the
+            underlying study is 10 to 40 per 100,000.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Settings -->
+    <section id="tab-settings" class="tab-content">
+      <div class="card">
+        <h2>Settings</h2>
+        <p>
+          Use these settings to define the population, analysis horizon and benefit metric per life saved. These settings
+          apply to all scenarios. Additional benefit metrics translate lives saved into hospitalisations, ICU admissions
+          and working days saved.
+        </p>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="setting-horizon">
+              Analysis horizon (years)
+              <span class="info-icon" data-tooltip="Number of years over which costs and benefits are considered. For short-lived mandates, 1 year is reasonable.">i</span>
+            </label>
+            <input type="number" id="setting-horizon" min="0.25" step="0.25" value="1" />
+          </div>
+
+          <div class="form-group">
+            <label for="setting-population">
+              Population covered
+              <span class="info-icon" data-tooltip="Number of people exposed to the mandate (for example the population under the restrictions).">i</span>
+            </label>
+            <input type="number" id="setting-population" min="0" step="10000" value="1000000" />
+          </div>
+
+          <div class="form-group">
+            <label for="setting-currency">
+              Currency label
+              <span class="info-icon" data-tooltip="Label used when displaying monetary results (for example AUD, EUR, INR, or a generic label). This can be overwritten manually.">i</span>
+            </label>
+            <input type="text" id="setting-currency" value="local currency units" />
+          </div>
+
+          <div class="form-group">
+            <label for="setting-vsl-metric">
+              Benefit metric
+              <span class="info-icon" data-tooltip="Choose how the monetary value per life saved is interpreted, or which primary outcome to emphasise in the results narrative.">i</span>
+            </label>
+            <select id="setting-vsl-metric">
+              <option value="vsl" selected>Value of statistical life (VSL)</option>
+              <option value="vsly">Value of a statistical life-year (VSLY)</option>
+              <option value="qalys">Monetary value per QALY gained</option>
+              <option value="healthsys">Average health system cost savings per life saved</option>
+              <option value="hosp">Expected hospitalisations averted</option>
+              <option value="icu">Expected ICU admissions averted</option>
+              <option value="workdays">Expected working days saved</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="setting-vsl">
+              Value per life saved
+              <span class="info-icon" data-tooltip="Monetary value attached to each life saved or equivalent health gain, consistent with your chosen benefit metric and regulatory guidance.">i</span>
+            </label>
+            <input type="number" id="setting-vsl" min="0" step="100000" value="5400000" />
+            <div id="vsl-calibration-note" class="small-note"></div>
+          </div>
+        </div>
+
+        <h3>Additional benefit metrics (non-monetary, optional)</h3>
+        <p class="small-note">
+          These conversions are used to translate lives saved into hospitalisations, ICU admissions and working days
+          saved for narrative purposes. They are not treated as separate benefit-cost ratios.
+        </p>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="metric-hosp-per-life">
+              Hospitalisations averted per life saved
+              <span class="info-icon" data-tooltip="For example, if each life saved corresponds to 8 hospital admissions averted, enter 8.">i</span>
+            </label>
+            <input type="number" id="metric-hosp-per-life" min="0" step="0.1" value="8" />
+          </div>
+          <div class="form-group">
+            <label for="metric-hosp-per100k">
+              Override: hospitalisations averted per 100,000 people (optional)
+              <span class="info-icon" data-tooltip="If you have a direct estimate of hospitalisations averted per 100,000 people, enter it here to override the conversion above.">i</span>
+            </label>
+            <input type="number" id="metric-hosp-per100k" min="0" step="1" />
+          </div>
+
+          <div class="form-group">
+            <label for="metric-icu-per-life">
+              ICU admissions averted per life saved
+              <span class="info-icon" data-tooltip="For example, if each life saved corresponds to 10 ICU admissions averted, enter 10.">i</span>
+            </label>
+            <input type="number" id="metric-icu-per-life" min="0" step="0.1" value="10" />
+          </div>
+          <div class="form-group">
+            <label for="metric-icu-per100k">
+              Override: ICU admissions averted per 100,000 people (optional)
+            </label>
+            <input type="number" id="metric-icu-per100k" min="0" step="1" />
+          </div>
+
+          <div class="form-group">
+            <label for="metric-workdays-per-life">
+              Working days saved per life saved
+              <span class="info-icon" data-tooltip="Approximate working days preserved across the economy per life saved.">i</span>
+            </label>
+            <input type="number" id="metric-workdays-per-life" min="0" step="1" value="180" />
+          </div>
+          <div class="form-group">
+            <label for="metric-workdays-per100k">
+              Override: working days saved per 100,000 people (optional)
+            </label>
+            <input type="number" id="metric-workdays-per100k" min="0" step="10" />
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button id="btn-apply-settings" class="btn primary" type="button">Apply settings</button>
+          <button id="btn-restore-country-defaults" class="btn outline" type="button">
+            Restore recommended defaults for current country
+          </button>
+        </div>
+
+        <h3>Calibration helpers (optional)</h3>
+        <p class="small-note">
+          Use this section if your ministry has updated guidance on the value of a statistical life or related metrics.
+          The tool can store a user-calibrated default for this browser and add a visible note in the results.
+        </p>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="calibration-vsl-new">
+              New official value per life saved (for current country)
+            </label>
+            <input type="number" id="calibration-vsl-new" min="0" step="100000" />
+          </div>
+          <div class="form-group">
+            <label for="calibration-note-year">
+              Guideline year (for example 2029)
+            </label>
+            <input type="number" id="calibration-note-year" min="2000" max="2100" step="1" />
+          </div>
+        </div>
+        <div class="btn-row">
+          <button id="btn-apply-calibration" class="btn outline" type="button">
+            Store as new default for this browser
+          </button>
+        </div>
+        <p id="calibration-status" class="small-note"></p>
+      </div>
+    </section>
+
+    <!-- Configuration -->
+    <section id="tab-config" class="tab-content">
+      <div class="card">
+        <h2>Mandate configuration</h2>
+        <p>
+          Select a country, outbreak scenario and mandate design. The tool uses mixed logit preference estimates to
+          calculate the predicted probability that people would support this potential future vaccine mandate over no
+          mandate.
+        </p>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="cfg-country">
+              Country
+              <span class="info-icon" data-tooltip="Country whose preference estimates and context are used (Australia, France or Italy).">i</span>
+            </label>
+            <select id="cfg-country">
+              <option value="AU">Australia</option>
+              <option value="FR">France</option>
+              <option value="IT">Italy</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="cfg-outbreak">
+              Outbreak scenario
+              <span class="info-icon" data-tooltip="Frame under which respondents evaluated the mandate: a mild/endemic situation or a severe outbreak.">i</span>
+            </label>
+            <select id="cfg-outbreak">
+              <option value="mild">Mild / endemic</option>
+              <option value="severe">Severe outbreak</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="cfg-scope">
+              Scope of mandate
+              <span class="info-icon" data-tooltip="Who is subject to the mandate: only high-risk occupations, or all occupations and public spaces.">i</span>
+            </label>
+            <select id="cfg-scope">
+              <option value="highrisk">High-risk occupations only</option>
+              <option value="all">All occupations &amp; public spaces</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="cfg-exemptions">
+              Exemption policy
+              <span class="info-icon" data-tooltip="Criteria under which people can be exempted from the mandate (medical only, medical + religious, or medical + religious + personal belief).">i</span>
+            </label>
+            <select id="cfg-exemptions">
+              <option value="medical">Medical only</option>
+              <option value="medrel">Medical + religious</option>
+              <option value="medrelpers">Medical + religious + personal belief</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="cfg-coverage">
+              Coverage requirement to lift mandate
+              <span class="info-icon" data-tooltip="Vaccination coverage threshold at which the mandate is lifted (50%, 70% or 90% of the population vaccinated).">i</span>
+            </label>
+            <select id="cfg-coverage">
+              <option value="0.5">50% population vaccinated</option>
+              <option value="0.7">70% population vaccinated</option>
+              <option value="0.9">90% population vaccinated</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="cfg-lives">
+              Expected lives saved per 100,000
+              <span class="info-icon" data-tooltip="Epidemiological input: how many lives are expected to be saved per 100,000 people by introducing the mandate. In the study, values ranged from 10 to 40 per 100,000.">i</span>
+            </label>
+            <div class="slider-row">
+              <input type="range" id="cfg-lives" min="0" max="100" step="1" value="25" />
+              <span id="cfg-lives-display" class="slider-value">25</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button id="btn-apply-config" class="btn primary" type="button">Apply configuration</button>
+          <button id="btn-save-scenario" class="btn outline" type="button">Save scenario</button>
+        </div>
+      </div>
+
+      <div class="card emphasis-card">
+        <h2>Policy question and decision lens</h2>
+        <p>
+          Start with the policy question you are trying to answer. The guidance box helps frame the current scenario in a
+          way that is aligned with a practical decision problem rather than only a technical model output.
+        </p>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="policy-question-select">
+              Main policy question
+              <span class="info-icon" data-tooltip="Choose the decision lens that best matches the question being considered. The underlying model does not change, but the interpretation guidance does.">i</span>
+            </label>
+            <select id="policy-question-select">
+              <option value="none" selected>General exploration</option>
+              <option value="strict_vs_lenient">Compare a strict versus a lenient mandate</option>
+              <option value="max_support_bcr">Maximise support subject to a minimum BCR</option>
+              <option value="max_bcr_support">Maximise BCR subject to a minimum support threshold</option>
+              <option value="compare_countries">Compare a similar mandate across countries</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="policy-support-min">
+              Minimum support threshold (%)
+              <span class="info-icon" data-tooltip="Optional threshold used when the question is to maximise the benefit-cost ratio while retaining a minimum level of predicted public support.">i</span>
+            </label>
+            <input type="number" id="policy-support-min" min="0" max="100" step="1" placeholder="For example 60" />
+          </div>
+
+          <div class="form-group">
+            <label for="policy-bcr-min">
+              Minimum benefit-cost ratio
+              <span class="info-icon" data-tooltip="Optional threshold used when the question is to maximise predicted public support subject to a minimum acceptable benefit-cost ratio.">i</span>
+            </label>
+            <input type="number" id="policy-bcr-min" min="0" step="0.1" placeholder="For example 1.0" />
+          </div>
+        </div>
+
+        <div id="policy-guidance-text" class="context-banner">
+          Start by choosing what you are mainly trying to do. The policy guidance will adapt to the decision lens you
+          select.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Distributional and equity notes (optional)</h2>
+        <p class="small-note">
+          Use this section to record which groups or sectors are most affected by the configuration and any equity
+          concerns. Notes are saved with each scenario, flagged in the results and included in exports and AI prompts.
+        </p>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="dist-groups">
+              Groups most affected
+              <span class="info-icon" data-tooltip="For example, older adults, low-income workers, specific regions or minority communities.">i</span>
+            </label>
+            <textarea id="dist-groups" rows="2"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="dist-sectors">
+              Sectors most exposed
+              <span class="info-icon" data-tooltip="For example, hospitality, healthcare, education, transport or other sectors that bear most of the mandate burden.">i</span>
+            </label>
+            <textarea id="dist-sectors" rows="2"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="dist-equity-concerns">
+              Equity concerns
+              <span class="info-icon" data-tooltip="Short notes on fairness issues such as disproportionate impact on vulnerable groups, enforcement risks or access barriers.">i</span>
+            </label>
+            <textarea id="dist-equity-concerns" rows="3"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Current configuration at a glance</h2>
+        <div class="summary-grid">
+          <div>
+            <div class="summary-label">Country</div>
+            <div id="summary-country" class="summary-value">Not set</div>
+          </div>
+          <div>
+            <div class="summary-label">Outbreak scenario</div>
+            <div id="summary-outbreak" class="summary-value">Not set</div>
+          </div>
+          <div>
+            <div class="summary-label">Scope</div>
+            <div id="summary-scope" class="summary-value">Not set</div>
+          </div>
+          <div>
+            <div class="summary-label">Exemptions</div>
+            <div id="summary-exemptions" class="summary-value">Not set</div>
+          </div>
+          <div>
+            <div class="summary-label">Coverage threshold</div>
+            <div id="summary-coverage" class="summary-value">Not set</div>
+          </div>
+          <div>
+            <div class="summary-label">Expected lives saved</div>
+            <div id="summary-lives" class="summary-value">Not set</div>
+          </div>
+          <div>
+            <div class="summary-label">
+              Model-based public support
+              <span class="info-icon" data-tooltip="Predicted probability that the mandate would be chosen over no mandate, based on the mixed logit model.">i</span>
+            </div>
+            <div id="summary-support" class="summary-value">Not set</div>
+          </div>
+        </div>
+
+        <div class="status-chips">
+          <span id="status-support" class="status-chip status-neutral">Support: pending</span>
+          <span id="status-bcr" class="status-chip status-neutral">BCR: pending</span>
+          <span id="status-data" class="status-chip status-neutral">Data: pending</span>
+        </div>
+
+        <div id="headlineRecommendation" class="headline-box">
+          No configuration applied yet. Configure country, outbreak scenario and design, then click “Apply configuration”
+          to see a summary.
+        </div>
+      </div>
+    </section>
+
+    <!-- Costing -->
+    <section id="tab-costs" class="tab-content">
+      <div class="card">
+        <h2>Costing inputs</h2>
+        <p>
+          Enter indicative implementation costs for the mandate. These can be adjusted later as better estimates become
+          available. Costs are interpreted over the analysis horizon specified in the Settings tab.
+        </p>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="cost-it-systems">
+              Digital systems &amp; infrastructure
+              <span class="info-icon" data-tooltip="One-off and recurrent costs for IT systems, certificates, registries and integration.">i</span>
+            </label>
+            <input type="number" id="cost-it-systems" min="0" step="10000" value="0" />
+          </div>
+
+          <div class="form-group">
+            <label for="cost-communications">
+              Communications &amp; public information
+              <span class="info-icon" data-tooltip="Media campaigns, public information materials and stakeholder engagement related to the mandate.">i</span>
+            </label>
+            <input type="number" id="cost-communications" min="0" step="10000" value="0" />
+          </div>
+
+          <div class="form-group">
+            <label for="cost-enforcement">
+              Enforcement &amp; compliance
+              <span class="info-icon" data-tooltip="Inspection, enforcement staff, penalties administration and other compliance activities.">i</span>
+            </label>
+            <input type="number" id="cost-enforcement" min="0" step="10000" value="0" />
+          </div>
+
+          <div class="form-group">
+            <label for="cost-compensation">
+              Adverse-event monitoring &amp; compensation
+              <span class="info-icon" data-tooltip="Monitoring, pharmacovigilance and compensation schemes for vaccine-related harm.">i</span>
+            </label>
+            <input type="number" id="cost-compensation" min="0" step="10000" value="0" />
+          </div>
+
+          <div class="form-group">
+            <label for="cost-admin">
+              Administration &amp; programme management
+              <span class="info-icon" data-tooltip="Policy design, legal work, coordination and routine programme management.">i</span>
+            </label>
+            <input type="number" id="cost-admin" min="0" step="10000" value="0" />
+          </div>
+
+          <div class="form-group">
+            <label for="cost-other">
+              Other mandate-specific costs
+              <span class="info-icon" data-tooltip="Any additional costs that are directly attributable to the mandate.">i</span>
+            </label>
+            <input type="number" id="cost-other" min="0" step="10000" value="0" />
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button id="btn-apply-costs" class="btn primary" type="button">Apply costs</button>
+          <button id="btn-load-default-costs" class="btn outline" type="button">Load evidence-based default costs</button>
+          <button id="btn-save-scenario-costs" class="btn outline" type="button">Save scenario (with current costs)</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Cost summary</h2>
+        <div class="summary-grid">
+          <div>
+            <div class="summary-label">Total implementation cost</div>
+            <div id="summary-cost-total" class="summary-value">Not set</div>
+          </div>
+          <div>
+            <div class="summary-label">
+              Largest cost component
+              <span class="info-icon" data-tooltip="The single cost category that contributes most to total costs.">i</span>
+            </div>
+            <div id="summary-cost-main" class="summary-value">Not set</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Results -->
+    <section id="tab-results" class="tab-content">
+      <div class="card">
+        <h2>Results</h2>
+        <p>
+          This section summarises predicted public support, epidemiological benefits, additional non-monetary metrics,
+          monetary valuation and benefit-cost metrics for the current configuration.
+        </p>
+
+        <div class="results-grid">
+          <div class="results-block">
+            <h3>Key figures</h3>
+            <ul class="results-list">
+              <li>
+                <span class="label">Total lives saved (approx.):</span>
+                <span id="result-lives-total" class="value">Pending</span>
+              </li>
+              <li>
+                <span class="label">Monetary benefit of lives saved:</span>
+                <span id="result-benefit-monetary" class="value">Pending</span>
+              </li>
+              <li>
+                <span class="label">Total implementation cost:</span>
+                <span id="result-cost-total" class="value">Pending</span>
+              </li>
+              <li>
+                <span class="label">Net benefit (benefit − cost):</span>
+                <span id="result-net-benefit" class="value">Pending</span>
+              </li>
+              <li>
+                <span class="label">
+                  Benefit-cost ratio (BCR)
+                  <span class="info-icon" data-tooltip="Monetary benefit divided by total cost. Values above 1 suggest benefits exceed costs given the assumptions.">i</span>
+                </span>
+                <span id="result-bcr" class="value">Pending</span>
+              </li>
+              <li>
+                <span class="label">
+                  Predicted public support
+                  <span class="info-icon" data-tooltip="Probability, based on the mixed logit model, that people would support this mandate over no mandate.">i</span>
+                </span>
+                <span id="result-support" class="value">Pending</span>
+              </li>
+              <li>
+                <span class="label">
+                  Hospitalisations averted (approx.)
+                </span>
+                <span id="result-hosp-averted" class="value">Pending</span>
+              </li>
+              <li>
+                <span class="label">
+                  ICU admissions averted (approx.)
+                </span>
+                <span id="result-icu-averted" class="value">Pending</span>
+              </li>
+              <li>
+                <span class="label">
+                  Working days saved (approx.)
+                </span>
+                <span id="result-workdays-saved" class="value">Pending</span>
+              </li>
+            </ul>
+
+            <div id="equity-badge" class="equity-badge">
+              Equity concern flagged. See distributional notes.
+            </div>
+
+            <p id="resultsNarrative" class="results-narrative">
+              Apply a configuration and, if possible, enter costs to see a narrative summary of cost-benefit performance,
+              model-based public support and additional non-monetary metrics (hospitalisations, ICU admissions and
+              working days saved).
+            </p>
+
+            <p id="delta-summary" class="small-note delta-summary">
+              When you adjust parameters and click “Apply configuration”, this box will highlight how key metrics changed
+              relative to the previous configuration.
+            </p>
+
+            <div id="policy-eval-summary" class="policy-eval-box" aria-live="polite"></div>
+          </div>
+
+          <div class="results-block">
+            <h3>Cost profile and benefit-cost summary</h3>
+            <canvas id="chart-bcr" aria-label="Chart showing benefit, cost and net benefit" role="img"></canvas>
+          </div>
+
+          <div class="results-block">
+            <h3>Predicted public support and opt-out</h3>
+            <canvas id="chart-support" aria-label="Chart showing predicted public support and opt-out" role="img"></canvas>
+            <div class="support-threshold-legend">
+              <span class="legend-entry">
+                <span class="legend-line legend-line-minimal"></span> Minimal majority (50%)
+              </span>
+              <span class="legend-entry">
+                <span class="legend-line legend-line-strong"></span> Strong support threshold (70%)
+              </span>
+            </div>
+            <p class="small-note">
+              Bars show the share of respondents predicted to support the mandate versus preferring no mandate. Dashed
+              lines at 50% and 70% indicate a minimal majority and a strong support threshold.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Uncertainty and sensitivity</h2>
+        <p>
+          Use low, central and high assumptions for expected lives saved per 100,000 people to see how the headline
+          results move under different epidemiological assumptions. This does not replace a full probabilistic sensitivity
+          analysis, but it provides a quick structured range for discussion.
+        </p>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="unc-lives-low">
+              Low assumption: lives saved per 100,000
+              <span class="info-icon" data-tooltip="A conservative assumption for the epidemiological effect of the mandate.">i</span>
+            </label>
+            <input type="number" id="unc-lives-low" min="0" max="100" step="1" placeholder="For example 10" />
+          </div>
+
+          <div class="form-group">
+            <label for="unc-lives-central">
+              Central assumption: lives saved per 100,000
+              <span class="info-icon" data-tooltip="A central or best-estimate assumption for the epidemiological effect of the mandate.">i</span>
+            </label>
+            <input type="number" id="unc-lives-central" min="0" max="100" step="1" placeholder="For example 25" />
+          </div>
+
+          <div class="form-group">
+            <label for="unc-lives-high">
+              High assumption: lives saved per 100,000
+              <span class="info-icon" data-tooltip="An optimistic assumption for the epidemiological effect of the mandate.">i</span>
+            </label>
+            <input type="number" id="unc-lives-high" min="0" max="100" step="1" placeholder="For example 40" />
+          </div>
+        </div>
+
+        <div class="uncertainty-grid">
+          <div class="uncertainty-panel">
+            <div class="summary-label">Range for total lives saved</div>
+            <div id="unc-summary-lives" class="uncertainty-text">Enter low, central and high assumptions to see ranges.</div>
+          </div>
+          <div class="uncertainty-panel">
+            <div class="summary-label">Range for predicted support</div>
+            <div id="unc-summary-support" class="uncertainty-text">Not set</div>
+          </div>
+          <div class="uncertainty-panel">
+            <div class="summary-label">Range for benefit-cost ratio</div>
+            <div id="unc-summary-bcr" class="uncertainty-text">Not set</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Lives-saved equivalents (MRS)</h2>
+        <p>
+          The table below interprets preferences for mandate features on a “lives saved per 100,000 people” scale.
+          Each value shows how many expected lives saved per 100,000 people would be equivalent, in terms of acceptability,
+          to the change in the mandate feature.
+        </p>
+
+        <table id="mrs-table" class="table">
+          <thead>
+            <tr>
+              <th>Change in mandate design</th>
+              <th>Lives-saved equivalent (per 100,000)</th>
+              <th>Interpretation</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+
+        <p id="mrsNarrative" class="results-narrative">
+          Configure a mandate to see how changes in scope, exemptions or coverage compare to changes in expected lives
+          saved. Positive values indicate changes that make the option less preferred; negative values indicate changes that
+          make it more preferred.
+        </p>
+
+        <h3>Lives-saved equivalents: visual summary</h3>
+        <canvas id="chart-mrs" aria-label="Chart showing lives-saved equivalents for current configuration" role="img"></canvas>
+        <p class="small-note">
+          Bars above zero indicate changes that require more expected lives saved per 100,000 people to maintain the same
+          acceptability (less preferred). Bars below zero indicate changes that people view as more desirable.
+        </p>
+      </div>
+
+      <div class="card">
+        <p class="context-banner">
+          Results are based on stated-preference data and simple cost-benefit calculations. They provide structured
+          evidence but do not by themselves determine whether a mandate is appropriate. Equity and feasibility require
+          separate qualitative assessment.
+        </p>
+      </div>
+    </section>
+
+    <!-- Saved scenarios & exports -->
+    <section id="tab-scenarios" class="tab-content">
+      <div class="card" id="scenario-dashboard-card">
+        <h2>Scenario comparison dashboard (pinned scenarios)</h2>
+        <p class="small-note">
+          Pin up to three scenarios to compare their support, benefit-cost ratio, total lives saved and implementation
+          cost. The radar chart and traffic-light stripes update automatically when you change the set of pinned
+          scenarios.
+        </p>
+        <div class="scenario-dashboard-layout">
+          <div class="scenario-dashboard-chart">
+            <canvas id="pinnedRadarChart" aria-label="Radar chart comparing pinned scenarios" role="img"></canvas>
+          </div>
+          <div class="scenario-dashboard-side">
+            <div id="pinned-scenarios-summary" class="pinned-scenarios-summary">
+              <!-- Filled dynamically -->
+            </div>
+            <div class="small-note">
+              Traffic-light stripes summarise each pinned scenario at a glance:
+              green (favourable), amber (intermediate) and red (unfavourable) for support and BCR.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Saved scenarios</h2>
+        <p>
+          Each saved scenario captures the current settings, mandate configuration, costs, distributional notes and
+          model-based results. Click on a row to populate the scenario briefing. Scenarios with incomplete cost data are
+          shown in a lighter shade.
+        </p>
+
+        <div class="table-wrapper">
+          <table id="scenarios-table" class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Country</th>
+                <th>Outbreak</th>
+                <th>Scope</th>
+                <th>Exemptions</th>
+                <th>Coverage</th>
+                <th>Lives per 100,000</th>
+                <th>Total lives saved</th>
+                <th>Benefit</th>
+                <th>Cost</th>
+                <th>Net benefit</th>
+                <th>BCR</th>
+                <th>Support</th>
+                <th>Equity notes</th>
+                <th>Pin</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="btn-row">
+          <button id="btn-export-csv" class="btn outline" type="button">Export scenarios (CSV)</button>
+          <button id="btn-export-excel" class="btn outline" type="button">Export scenarios (Excel-readable)</button>
+          <button id="btn-export-word" class="btn outline" type="button">Export briefing (Word)</button>
+          <button id="btn-export-pdf" class="btn outline" type="button">Export data (CSV for PDF tools)</button>
+          <button id="btn-clear-storage" class="btn danger" type="button">Clear all saved scenarios (this browser)</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Scenario briefing text</h2>
+        <p>
+          This text summarises the selected or current scenario in plain language. It can be pasted directly into emails,
+          briefing notes or meeting minutes. Where equity concerns have been flagged, those notes are appended for
+          discussion.
+        </p>
+        <textarea id="scenario-briefing-text" rows="10"></textarea>
+        <button id="btn-copy-briefing" class="btn primary" type="button">Copy briefing text</button>
+      </div>
+    </section>
+
+    <!-- Briefings & AI prompts -->
+    <section id="tab-briefings" class="tab-content">
+      <div class="card">
+        <h2>Policy briefing template</h2>
+        <p>
+          This template provides a structured summary for ministers or senior officials. It is automatically populated
+          based on the current configuration, settings, costs and distributional notes.
+        </p>
+        <textarea id="briefing-template" rows="14"></textarea>
+        <button id="btn-copy-briefing-template" class="btn primary" type="button">Copy briefing template</button>
+      </div>
+
+      <div class="card">
+        <h2>AI prompts for Copilot / ChatGPT</h2>
+        <p>
+          Choose between a single-scenario policy brief and a comparative policy memo that draws on multiple saved
+          scenarios. Both prompt styles include an explicit equity reflection block.
+        </p>
+
+        <div class="prompt-mode-toggle">
+          <label>
+            <input type="radio" name="prompt-mode" id="prompt-mode-single" value="single" checked />
+            Single scenario policy brief
+          </label>
+          <label>
+            <input type="radio" name="prompt-mode" id="prompt-mode-comparative" value="comparative" />
+            Comparative policy memo (uses saved scenarios)
+          </label>
+        </div>
+        <p class="small-note" id="prompt-mode-note">
+          Comparative policy memos require at least two saved scenarios. If fewer are available, the tool will
+          fall back to a single-scenario brief.
+        </p>
+
+        <textarea id="ai-prompt" rows="18"></textarea>
+        <div class="btn-row">
+          <button id="btn-copy-ai-prompt" class="btn primary" type="button">Copy AI prompt</button>
+          <button id="btn-open-ai" class="btn outline" type="button">Open Copilot in a new window</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical appendix -->
+    <section id="tab-appendix" class="tab-content">
+      <div class="card">
+        <h2>Technical appendix</h2>
+        <p>
+          The technical appendix explains the data sources, statistical models and cost-benefit calculations used in
+          eMANDEVAL Future, and includes worked examples for each country. It is intended to support audit, adaptation and
+          documentation.
+        </p>
+        <ul>
+          <li>Summary of the discrete choice experiment and mixed logit / latent class models.</li>
+          <li>Coefficient tables for Australia, France and Italy under mild and severe outbreak frames.</li>
+          <li>Formal expression for model-based predicted support and numerical approximation.</li>
+          <li>Cost taxonomy, benefit metric assumptions and suggestions for country-specific calibration.</li>
+          <li>Worked examples for Italy (severe), Australia (mild) and France (mild) using the tool.</li>
+          <li>Short changelog and version history.</li>
+        </ul>
+        <p>
+          Open the full appendix in a new tab:
+          <a href="technical-appendix.html" target="_blank" rel="noopener">Open technical appendix</a>
+        </p>
+      </div>
+    </section>
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <span>eMANDEVAL Future: Vaccine mandate decision aid</span>
+    <span>Version v2.2.0 &nbsp;|&nbsp; Commercial interface refresh Mar 2026</span>
+  </footer>
+
+  <!-- Global tooltip -->
+  <div id="globalTooltip" class="tooltip tooltip-hidden"></div>
+
+  <!-- Toast container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
